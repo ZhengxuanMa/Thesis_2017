@@ -12,8 +12,7 @@ names(du) <- c('stockid','Report Date','Beg.Amt','End.Amt','DerInvestment Return
 ####assigning 1 to all companies with derivative usages.
 
 
-
-##################ÕâÀïÏÈ²»¶¯ £¡£¡£¡µÈcombine µ½MAIN ÀïÃæÒ»ÆðÅª£¬ Ò»Æðassign derivative dummy
+##################assign derivative dummy#################
 
 for (i in 1:length(du$`Derivative Usage Dummy`)) {
   
@@ -162,12 +161,12 @@ tb <- tb[,-3]
 ###mainData <- merge(x=tb,y=du,by=c("stockid",'Report Date'),all=TRUE)
 
 
-#####Reading in ¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý data
+#####Reading in å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ® data
 
 
 
 
-###°ÑtbµÄstock id Åª³É ¸údu Ò»Ñù¡£
+###æŠŠtbçš„stock id å¼„æˆ è·Ÿdu ä¸€æ ·ã€‚
 
 
 tb1 <- tb
@@ -235,7 +234,7 @@ MAINDU <- full_join(x=du,y=sampleTB,by=c("stockid",'Report Date'),all=TRUE)
 
 ##Balance sheet currency information:
 
-Foregncurrencyfrombalancesheet <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/balancesheet.csv')
+Foregncurrencyfrombalancesheet <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/balancesheet.csv')
 
 Foregncurrencyfrombalancesheet <- Foregncurrencyfrombalancesheet[,-1]
 
@@ -288,7 +287,7 @@ while(nchar(Foregncurrencyfrombalancesheet$stockid[i]) == 4) {
 
 #Income statement currency info:
 
-incomeCurrency1 <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/ÀûÈó»ã¶ÒÊÕÒæ1.csv')
+incomeCurrency1 <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/åˆ©æ¶¦æ±‡å…‘æ”¶ç›Š1.csv')
 
 incomeCurrency1 <- incomeCurrency1[,-1]
 names(incomeCurrency1) <- c('stockid','Report Date','ISCurrencyDiff')
@@ -314,10 +313,10 @@ for(i in 1:length(incomeCurrency1$stockid)){
 incomeCurrency1 <- incomeCurrency1[-n,]
 
 
-##############Repitition for ¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/ÀûÈó»ã¶ÒÊÕÒæ2.csv
+##############Repitition for å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/åˆ©æ¶¦æ±‡å…‘æ”¶ç›Š2.csv
 
 
-incomeCurrency2 <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/ÀûÈó»ã¶ÒÊÕÒæ2.csv')
+incomeCurrency2 <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/åˆ©æ¶¦æ±‡å…‘æ”¶ç›Š2.csv')
 
 incomeCurrency2 <- incomeCurrency2[,-1]
 names(incomeCurrency2) <- c('stockid','Report Date','ISCurrencyDiff')
@@ -352,7 +351,7 @@ IS_Currency_GL <- bind_rows(incomeCurrency1,incomeCurrency2)
 ################Foregn currency related data under Capital Reserves Accounting subject
 
 
-CapitalAccountForeignCurrency <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/×Ê±¾¹«»ýÏÂÃæµÄÍâ±ÒÕÛËã1.csv')
+CapitalAccountForeignCurrency <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/èµ„æœ¬å…¬ç§¯ä¸‹é¢çš„å¤–å¸æŠ˜ç®—1.csv')
 
 
 CapitalAccountForeignCurrency <- CapitalAccountForeignCurrency[,-1]
@@ -361,9 +360,9 @@ names(CapitalAccountForeignCurrency) <- c('stockid','Report Date','ForeignCapita
 
 
 
-############Foreign currency data from EVA»ã¶Ò.csv
+############Foreign currency data from EVAæ±‡å…‘.csv
 
-EVAcurrency <-bind_rows(read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/EVA»ã¶Ò1.csv'),read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/EVA»ã¶Ò2.csv'),read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/EVA»ã¶Ò3.csv')
+EVAcurrency <-bind_rows(read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/EVAæ±‡å…‘1.csv'),read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/EVAæ±‡å…‘2.csv'),read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/EVAæ±‡å…‘3.csv')
 
 )
 
@@ -890,7 +889,7 @@ while(nchar(x[i]) == 4) {
 
 #####Import Total Asset
 
-totalassets1 <- bind_rows(read_csv('×Ê²ú×Ü¶î/×Ê²ú×Ü¶î1.csv'),read_csv('×Ê²ú×Ü¶î/×Ê²ú×Ü¶î2.csv'))
+totalassets1 <- bind_rows(read_csv('èµ„äº§æ€»é¢/èµ„äº§æ€»é¢1.csv'),read_csv('èµ„äº§æ€»é¢/èµ„äº§æ€»é¢2.csv'))
 
 names(totalassets1) <- c('stockid','Report Date','Total Asset')
 
@@ -919,17 +918,17 @@ for(i in 1:length(totalassets1$`Report Date`)){
 
 beep()
 
-######¾ý°²µÄtobinsq
+######å›å®‰çš„tobinsq
 
 
 
-JUNANTQ <- read_csv('¾ý°²tobinsq/¾ý°²tobinsq.csv')
+JUNANTQ <- read_csv('å›å®‰tobinsq/å›å®‰tobinsq.csv')
 names(JUNANTQ) <- c('stockid','Report Date','INDUSTRY CODE','TQA','TQB','TQC','TQD')
 
 
 JUNANTQ <- (filter(JUNANTQ,stockid <300398))
 
-######08/06/2017 µ¼Èëbeta and alpha
+######08/06/2017 å¯¼å…¥beta and alpha
 
 
 Beta_Alpha <- read_csv('beta and alpha/beta and alpha.csv')
@@ -969,7 +968,7 @@ main_with_totalasset <- left_join(main_with_totalasset,Beta_Alpha,by=c('stockid'
 #####Importing and dealing with stock cumulated annual return data
 
 
-CAR <- read_csv('ÄêÊÕÒæÓë²¨¶¯/ÄêÀÛ¼ÆÊÕÒæÂÊ.csv')
+CAR <- read_csv('å¹´æ”¶ç›Šä¸Žæ³¢åŠ¨/å¹´ç´¯è®¡æ”¶ç›ŠçŽ‡.csv')
 
 CAR <- CAR[,-2]
 
@@ -993,7 +992,7 @@ Pooled_main_with_totalasset <- left_join(Pooled_main_with_totalasset,CAR, by=c('
 
 #####Junan's stock return
 
-JCAR <- read_csv('ÄêÊÕÒæÓë²¨¶¯/JUNANÄêÀÛ¼ÆÊÕÒæÂÊ.csv')
+JCAR <- read_csv('å¹´æ”¶ç›Šä¸Žæ³¢åŠ¨/JUNANå¹´ç´¯è®¡æ”¶ç›ŠçŽ‡.csv')
 
 
 names(JCAR) <- c('stockid','Report Date','CR NO DIV','Cumulative No div')
@@ -1029,10 +1028,10 @@ main_with_totalasset <-  left_join(main_with_totalasset,JCAR,by=c('stockid','Rep
 
 
 
-#######¹É¼ÛÄê²¨¶¯Êý¾Ýµ¼ÈëÓëcleaning
+#######è‚¡ä»·å¹´æ³¢åŠ¨æ•°æ®å¯¼å…¥ä¸Žcleaning
 
 
-VOL <- read_csv('¸ö¹ÉÄê²¨¶¯ÂÊ.csv')
+VOL <- read_csv('ä¸ªè‚¡å¹´æ³¢åŠ¨çŽ‡.csv')
 
 
 
@@ -1282,7 +1281,7 @@ CF1$`NETOPCF/SHARETTM` <- parse_double(CF1$`NETOPCF/SHARETTM`)
   
 ##take CF2[901:905,] for example:
   
-  # A tibble: 5 ¡Á 12
+  # A tibble: 5 Ã— 12
  # stockid `Report Date` `SALE/SHARE TTM`
  # <chr>        <date>            <chr>
   #  1  002466    2011-03-31             <NA>
@@ -1654,7 +1653,7 @@ CF1$`NETOPCF/SHARETTM` <- parse_double(CF1$`NETOPCF/SHARETTM`)
   
   
   
-  #####Doing the samething for Tobins Q ###ÕâÊÇÓÃÀ´ËãTQ µÄ±ä¶¯µÄ¡£
+  #####Doing the samething for Tobins Q ###è¿™æ˜¯ç”¨æ¥ç®—TQ çš„å˜åŠ¨çš„ã€‚
   
   
   gb <- group_by(MAIN1,stockid,`Report Date`)
@@ -1673,8 +1672,8 @@ gb <- group_by(main_with_totalasset,stockid,`Report Date`)
   
   
   
-  #######################main_with_totalasset ÊÇ rearranged È»ºóleft_joint totalassets1.
-  ####È»ºóÓÖleft joint ÁË JUNANTQ ---¾ý°²Êý¾Ý¿âµÄTQ¡£
+  #######################main_with_totalasset æ˜¯ rearranged ç„¶åŽleft_joint totalassets1.
+  ####ç„¶åŽåˆleft joint äº† JUNANTQ ---å›å®‰æ•°æ®åº“çš„TQã€‚
   
   CT <- diff(main_with_totalasset$TQA)
   CTTQ <- matrix(nrow = length(CT)+1)
@@ -2628,7 +2627,7 @@ beep()
   ###correcting dividend data 
   
   
-  Divcorrect <- read_csv('·Öºì.csv')
+  Divcorrect <- read_csv('åˆ†çº¢.csv')
   
   
   names(Divcorrect) <- c('stockid','Report Date','DivPs','PayoutRatio')
@@ -3259,7 +3258,7 @@ names(du) <- c('stockid','Report Date','Beg.Amt','End.Amt','DerInvestment Return
 
 
 
-##################ÕâÀïÏÈ²»¶¯ £¡£¡£¡µÈcombine µ½MAIN ÀïÃæÒ»ÆðÅª£¬ Ò»Æðassign derivative dummy
+##################è¿™é‡Œå…ˆä¸åŠ¨ ï¼ï¼ï¼ç­‰combine åˆ°MAIN é‡Œé¢ä¸€èµ·å¼„ï¼Œ ä¸€èµ·assign derivative dummy
 
 for (i in 1:length(du$`Derivative Usage Dummy`)) {
   
@@ -3408,12 +3407,12 @@ tb <- tb[,-3]
 ###mainData <- merge(x=tb,y=du,by=c("stockid",'Report Date'),all=TRUE)
 
 
-#####Reading in ¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý data
+#####Reading in å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ® data
 
 
 
 
-###°ÑtbµÄstock id Åª³É ¸údu Ò»Ñù¡£
+###æŠŠtbçš„stock id å¼„æˆ è·Ÿdu ä¸€æ ·ã€‚
 
 
 tb1 <- tb
@@ -3481,7 +3480,7 @@ MAINDU <- full_join(x=du,y=sampleTB,by=c("stockid",'Report Date'),all=TRUE)
 
 ##Balance sheet currency information:
 
-Foregncurrencyfrombalancesheet <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/balancesheet.csv')
+Foregncurrencyfrombalancesheet <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/balancesheet.csv')
 
 Foregncurrencyfrombalancesheet <- Foregncurrencyfrombalancesheet[,-1]
 
@@ -3534,7 +3533,7 @@ while(nchar(Foregncurrencyfrombalancesheet$stockid[i]) == 4) {
 
 #Income statement currency info:
 
-incomeCurrency1 <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/ÀûÈó»ã¶ÒÊÕÒæ1.csv')
+incomeCurrency1 <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/åˆ©æ¶¦æ±‡å…‘æ”¶ç›Š1.csv')
 
 incomeCurrency1 <- incomeCurrency1[,-1]
 names(incomeCurrency1) <- c('stockid','Report Date','ISCurrencyDiff')
@@ -3560,10 +3559,10 @@ for(i in 1:length(incomeCurrency1$stockid)){
 incomeCurrency1 <- incomeCurrency1[-n,]
 
 
-##############Repitition for ¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/ÀûÈó»ã¶ÒÊÕÒæ2.csv
+##############Repitition for å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/åˆ©æ¶¦æ±‡å…‘æ”¶ç›Š2.csv
 
 
-incomeCurrency2 <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/ÀûÈó»ã¶ÒÊÕÒæ2.csv')
+incomeCurrency2 <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/åˆ©æ¶¦æ±‡å…‘æ”¶ç›Š2.csv')
 
 incomeCurrency2 <- incomeCurrency2[,-1]
 names(incomeCurrency2) <- c('stockid','Report Date','ISCurrencyDiff')
@@ -3598,7 +3597,7 @@ IS_Currency_GL <- bind_rows(incomeCurrency1,incomeCurrency2)
 ################Foregn currency related data under Capital Reserves Accounting subject
 
 
-CapitalAccountForeignCurrency <- read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/×Ê±¾¹«»ýÏÂÃæµÄÍâ±ÒÕÛËã1.csv')
+CapitalAccountForeignCurrency <- read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/èµ„æœ¬å…¬ç§¯ä¸‹é¢çš„å¤–å¸æŠ˜ç®—1.csv')
 
 
 CapitalAccountForeignCurrency <- CapitalAccountForeignCurrency[,-1]
@@ -3607,9 +3606,9 @@ names(CapitalAccountForeignCurrency) <- c('stockid','Report Date','ForeignCapita
 
 
 
-############Foreign currency data from EVA»ã¶Ò.csv
+############Foreign currency data from EVAæ±‡å…‘.csv
 
-EVAcurrency <-bind_rows(read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/EVA»ã¶Ò1.csv'),read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/EVA»ã¶Ò2.csv'),read_csv('¹ØÓÚ¹«Ë¾ÊÇ·ñÓÐº£ÍâÒµÎñµÄdummy×é³ÉÊý¾Ý/EVA»ã¶Ò3.csv')
+EVAcurrency <-bind_rows(read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/EVAæ±‡å…‘1.csv'),read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/EVAæ±‡å…‘2.csv'),read_csv('å…³äºŽå…¬å¸æ˜¯å¦æœ‰æµ·å¤–ä¸šåŠ¡çš„dummyç»„æˆæ•°æ®/EVAæ±‡å…‘3.csv')
                         
 )
 
@@ -4136,7 +4135,7 @@ Addzero <- function(x){
 
 #####Import Total Asset
 
-totalassets1 <- bind_rows(read_csv('×Ê²ú×Ü¶î/×Ê²ú×Ü¶î1.csv'),read_csv('×Ê²ú×Ü¶î/×Ê²ú×Ü¶î2.csv'))
+totalassets1 <- bind_rows(read_csv('èµ„äº§æ€»é¢/èµ„äº§æ€»é¢1.csv'),read_csv('èµ„äº§æ€»é¢/èµ„äº§æ€»é¢2.csv'))
 
 names(totalassets1) <- c('stockid','Report Date','Total Asset')
 
@@ -4165,17 +4164,17 @@ for(i in 1:length(totalassets1$`Report Date`)){
 
 beep()
 
-######¾ý°²µÄtobinsq
+######å›å®‰çš„tobinsq
 
 
 
-JUNANTQ <- read_csv('¾ý°²tobinsq/¾ý°²tobinsq.csv')
+JUNANTQ <- read_csv('å›å®‰tobinsq/å›å®‰tobinsq.csv')
 names(JUNANTQ) <- c('stockid','Report Date','INDUSTRY CODE','TQA','TQB','TQC','TQD')
 
 
 JUNANTQ <- (filter(JUNANTQ,stockid <300398))
 
-######08/06/2017 µ¼Èëbeta and alpha
+######08/06/2017 å¯¼å…¥beta and alpha
 
 
 Beta_Alpha <- read_csv('beta and alpha/beta and alpha.csv')
@@ -4215,7 +4214,7 @@ main_with_totalasset <- left_join(main_with_totalasset,Beta_Alpha,by=c('stockid'
 #####Importing and dealing with stock cumulated annual return data
 
 
-CAR <- read_csv('ÄêÊÕÒæÓë²¨¶¯/ÄêÀÛ¼ÆÊÕÒæÂÊ.csv')
+CAR <- read_csv('å¹´æ”¶ç›Šä¸Žæ³¢åŠ¨/å¹´ç´¯è®¡æ”¶ç›ŠçŽ‡.csv')
 
 CAR <- CAR[,-2]
 
@@ -4239,7 +4238,7 @@ Pooled_main_with_totalasset <- left_join(Pooled_main_with_totalasset,CAR, by=c('
 
 #####Junan's stock return
 
-JCAR <- read_csv('ÄêÊÕÒæÓë²¨¶¯/JUNANÄêÀÛ¼ÆÊÕÒæÂÊ.csv')
+JCAR <- read_csv('å¹´æ”¶ç›Šä¸Žæ³¢åŠ¨/JUNANå¹´ç´¯è®¡æ”¶ç›ŠçŽ‡.csv')
 
 
 names(JCAR) <- c('stockid','Report Date','CR NO DIV','Cumulative No div')
@@ -4275,10 +4274,10 @@ main_with_totalasset <-  left_join(main_with_totalasset,JCAR,by=c('stockid','Rep
 
 
 
-#######¹É¼ÛÄê²¨¶¯Êý¾Ýµ¼ÈëÓëcleaning
+#######è‚¡ä»·å¹´æ³¢åŠ¨æ•°æ®å¯¼å…¥ä¸Žcleaning
 
 
-VOL <- read_csv('¸ö¹ÉÄê²¨¶¯ÂÊ.csv')
+VOL <- read_csv('ä¸ªè‚¡å¹´æ³¢åŠ¨çŽ‡.csv')
 
 
 
@@ -4528,7 +4527,7 @@ names(CFsd2) <- names(CFsd2) <- c('stockid','Report Date','i Counts','StandardDe
 
 ##take CF2[901:905,] for example:
 
-# A tibble: 5 ¡Á 12
+# A tibble: 5 Ã— 12
 # stockid `Report Date` `SALE/SHARE TTM`
 # <chr>        <date>            <chr>
 #  1  002466    2011-03-31             <NA>
@@ -4900,7 +4899,7 @@ ChangeInCFvolatility[1:length(gb$difference)] <- gb$difference
 
 
 
-#####Doing the samething for Tobins Q ###ÕâÊÇÓÃÀ´ËãTQ µÄ±ä¶¯µÄ¡£
+#####Doing the samething for Tobins Q ###è¿™æ˜¯ç”¨æ¥ç®—TQ çš„å˜åŠ¨çš„ã€‚
 
 
 gb <- group_by(MAIN1,stockid,`Report Date`)
@@ -4919,8 +4918,8 @@ gb<- summarize(gb,differenceTQA = diff(TQA))
 
 
 
-#######################main_with_totalasset ÊÇ rearranged È»ºóleft_joint totalassets1.
-####È»ºóÓÖleft joint ÁË JUNANTQ ---¾ý°²Êý¾Ý¿âµÄTQ¡£
+#######################main_with_totalasset æ˜¯ rearranged ç„¶åŽleft_joint totalassets1.
+####ç„¶åŽåˆleft joint äº† JUNANTQ ---å›å®‰æ•°æ®åº“çš„TQã€‚
 
 CT <- diff(main_with_totalasset$TQA)
 CTTQ <- matrix(nrow = length(CT)+1)
@@ -5874,7 +5873,7 @@ summary(plm(log(CFsdtplus1) ~ try$`Derivative Usage Dummy` + try$oversea+
 ###correcting dividend data 
 
 
-Divcorrect <- read_csv('·Öºì.csv')
+Divcorrect <- read_csv('åˆ†çº¢.csv')
 
 
 names(Divcorrect) <- c('stockid','Report Date','DivPs','PayoutRatio')
