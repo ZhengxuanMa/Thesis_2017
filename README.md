@@ -1,5 +1,7 @@
 # Thesis_2017
-Introduction 
+
+#Introduction 
+
 Financial academics and practitioner in the relevant fields have all paid special emphasis on 
 financial derivative instruments due of its versatility, indeterminacy and two-sidedness.
 Just like what Warrant Buffet has once descripted: “In my view, derivatives are financial 
